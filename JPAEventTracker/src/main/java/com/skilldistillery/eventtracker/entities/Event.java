@@ -1,4 +1,4 @@
-package com.skilldistillery.eventtracker;
+package com.skilldistillery.eventtracker.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
