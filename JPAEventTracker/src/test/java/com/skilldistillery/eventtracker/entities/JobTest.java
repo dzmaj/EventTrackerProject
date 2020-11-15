@@ -2,6 +2,7 @@ package com.skilldistillery.eventtracker.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,13 +15,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.skilldistillery.eventtracker.entities.Event;
-
-class EventTest {
+class JobTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Event event;
+	private Job job;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -34,20 +33,28 @@ class EventTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		event  = em.find(Event.class, 1);
+		job  = em.find(Job.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		event = null;
+		job = null;
 	}
 
 	@Test
-	@DisplayName("test Event entity")
+	@DisplayName("test job entity")
 	void test() {
-		assertNotNull(event);
-		assertEquals("event name", event.getName());
+		assertNotNull(job);
+		assertEquals("Junior Web Developer", job.getPosition());
+	}
+	
+	@Test
+	@DisplayName("test job mapping to update")
+	void test2() {
+		assertNotNull(job);
+		assertTrue(job.getUpdates().size() > 0);
+		assertEquals("applied", job.getUpdates().get(0).getStatus());
 	}
 
 }

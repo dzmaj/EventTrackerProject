@@ -9,7 +9,8 @@
     </provider>
 	
 	<!-- List Entities Here -->
-	<class>com.skilldistillery.eventtracker.Event</class>
+	<class>com.skilldistillery.eventtracker.Job</class>
+	<class>com.skilldistillery.eventtracker.Update</class>
 
 	
 

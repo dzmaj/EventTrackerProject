@@ -11,35 +11,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.eventtracker.entities.Event;
-import com.skilldistillery.eventtracker.services.EventService;
+import com.skilldistillery.eventtracker.entities.Job;
+import com.skilldistillery.eventtracker.services.JobService;
 
 @RequestMapping("api")
 @RestController
-public class EventController {
+public class JobController {
 	
 	@Autowired
-	private EventService eventSvc;
+	private JobService jobSvc;
 	
 	@GetMapping("ping")
 	public String pong() {
 		return "pong";
 	}
 	
-	@GetMapping("events")
-	public List<Event> index(HttpServletRequest request, HttpServletResponse response) {
-		return eventSvc.index();
+	@GetMapping("jobs")
+	public List<Job> index(HttpServletRequest request, HttpServletResponse response) {
+		return jobSvc.index();
 	}
 	
-	@GetMapping("events/{id}")
-	public Event findById(@PathVariable Integer id, HttpServletRequest request, HttpServletResponse response) {
-		Event event = eventSvc.find(id);
+	@GetMapping("jobs/{id}")
+	public Job findById(@PathVariable Integer id, HttpServletRequest request, HttpServletResponse response) {
+		Job job = jobSvc.find(id);
 		
-		if (event == null) {
+		if (job == null) {
 			response.setStatus(404);
 		}
-		
-		return event;
+		return job;
 	}
 
 }
