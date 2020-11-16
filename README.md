@@ -26,6 +26,7 @@ http://3.131.11.111:8080/EventTracker/api/
 | Job          | POST api/jobs                              | Creates a new job                                                                      |
 | Job          | PUT api/jobs/{jobId}                       | Updates a job                                                                          |
 | void         | DELETE api/jobs/{jobId}                    | Deletes a job                                                                          |
+| List<Job>    | GET api/jobs/search/{keyword}              | Searches for jobs containing the keyword in the position, description, or company name |
 | List<Update> | GET api/jobs/{jobId}/updates               | Gets a list of all updates for a job                                                   |
 | Update       | GET api/jobs/{jobId}/updates/{updateId}    | Gets an update for a job                                                               |
 | Update       | POST api/jobs/{jobId}/updates              | Creates an update for a job                                                            |
