@@ -37,6 +37,9 @@ public class UpdateServiceImpl implements UpdateService {
 
 	@Override
 	public List<Update> index(int jobId) {
+		if (!jobRepo.existsById(jobId)) {
+			return null;
+		}
 		return updateRepo.findByJobId(jobId);
 	}
 
