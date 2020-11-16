@@ -17,7 +17,8 @@ This project went faster than I expected, Spring data repositories cut out a lot
 - Postman
 
 ## REST Mappings
-
+Base URL
+http://3.131.11.111:8080/EventTracker/api/
 | Return Type  | Route                                      | Functionality                                                                          |
 |--------------|--------------------------------------------|----------------------------------------------------------------------------------------|
 | List<Job>    | GET api/jobs                               | Gets a list of all jobs                                                                |
