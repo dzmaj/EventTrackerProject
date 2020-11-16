@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.eventtracker.entities.Job;
 import com.skilldistillery.eventtracker.entities.Update;
 import com.skilldistillery.eventtracker.repositories.JobRepository;
 import com.skilldistillery.eventtracker.repositories.UpdateRepository;
 
+@Service
 public class UpdateServiceImpl implements UpdateService {
 	
 	@Autowired
@@ -91,7 +93,7 @@ public class UpdateServiceImpl implements UpdateService {
 			return null;
 		}
 		updateRepo.deleteById(updateId);
-		return updateRepo.existsById(updateId);
+		return !updateRepo.existsById(updateId);
 	}
 
 }
