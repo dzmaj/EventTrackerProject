@@ -16,8 +16,8 @@ public class JobServiceImpl implements JobService {
 	
 	@Override
 	public Job find(int id) {
-		Optional<Job> eventOpt = jobRepo.findById(id);
-		return eventOpt.isPresent() ? eventOpt.get() : null;
+		Optional<Job> jobOpt = jobRepo.findById(id);
+		return jobOpt.isPresent() ? jobOpt.get() : null;
 	}
 
 	@Override
