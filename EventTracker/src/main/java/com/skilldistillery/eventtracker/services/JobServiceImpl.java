@@ -27,26 +27,43 @@ public class JobServiceImpl implements JobService {
 
 	@Override
 	public Job create(Job job) {
-		// TODO Auto-generated method stub
-		return null;
+		job = jobRepo.saveAndFlush(job);
+		return job;
 	}
 
 	@Override
 	public Job update(Job job, int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Job> dbJobOpt = jobRepo.findById(id);
+		if (!dbJobOpt.isPresent()) {
+			return null;
+		}
+		Job dbJob = dbJobOpt.get();
+		if (job.getCity() != null) { dbJob.setCity(job.getCity()); }
+		if (job.getState() != null) { dbJob.setState(job.getState()); }
+		if (job.getPosition() != null) { dbJob.setPosition(job.getPosition()); }
+		if (job.getDescription() != null) { dbJob.setDescription(job.getDescription()); }
+		if (job.getUrl() != null) { dbJob.setUrl(job.getUrl()); }
+		if (job.getSource() != null) { dbJob.setSource(job.getSource()); }
+		return jobRepo.saveAndFlush(dbJob);
 	}
 
 	@Override
 	public Boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		if (!jobRepo.existsById(id)) {
+			return null;
+		}
+		jobRepo.deleteById(id);
+		if (jobRepo.existsById(id)) {
+			return false;
+		} else {
+			return true;
+		}
+		
 	}
 
 	@Override
 	public List<Job> findByKeyword(String kw) {
-		// TODO Auto-generated method stub
-		return null;
+		return jobRepo.findByPositionContainingOrDescriptionContainingOrCompanyContaining(kw, kw, kw);
 	}
 
 }
