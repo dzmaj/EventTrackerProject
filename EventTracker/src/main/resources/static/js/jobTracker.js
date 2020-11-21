@@ -68,10 +68,12 @@ function buildJobsTable(jobs) {
 		data.textContent = element.source;
 		row.appendChild(data);
 		data = document.createElement('td')
-		let url = document.createElement('a');
-		url.setAttribute('href', element.url)
-		url.textContent = element.url.slice(0,20) + '...';
-		data.appendChild(url)
+		if (typeof element.url === 'string') {
+			let url = document.createElement('a');
+			url.setAttribute('href', element.url)
+			url.textContent = element.url.slice(0,20) + '...';
+			data.appendChild(url)
+		}
 		row.appendChild(data);
 
 		// let position = document.createElement('td')
