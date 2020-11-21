@@ -10,7 +10,6 @@ function init() {
 }
 function buildJobsTable(jobs) {
 	let tableDiv = document.getElementById('tableDiv');
-	tableDiv.textContent = '';
 	let table = document.createElement('table');
 	table.setAttribute('class', 'table');
 	tableDiv.appendChild(table);
