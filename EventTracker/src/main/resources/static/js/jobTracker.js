@@ -74,36 +74,6 @@ function buildJobsTable(jobs) {
 			data.appendChild(url)
 		}
 		row.appendChild(data);
-
-		// let position = document.createElement('td')
-		// position.textContent = element.position;
-		// row.appendChild(position);
-
-		// let company = document.createElement('td')
-		// company.textContent = element.company;
-		// row.appendChild(company);
-
-		// let description = document.createElement('td')
-		// position.textContent = element.position;
-		// row.appendChild(position);
-
-		// let location = document.createElement('td')
-		// position.textContent = element.position;
-		// row.appendChild(position);
-
-		// let status = document.createElement('td')
-		// position.textContent = element.position;
-		// row.appendChild(position);
-
-		// let source = document.createElement('td')
-		// position.textContent = element.position;
-		// row.appendChild(position);
-
-		// let url = document.createElement('td')
-		// position.textContent = element.position;
-		// row.appendChild(position);
-
-
 	});
 	
 
