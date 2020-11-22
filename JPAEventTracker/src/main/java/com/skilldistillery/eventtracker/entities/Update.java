@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "job_update")
 public class Update {
@@ -27,6 +29,7 @@ public class Update {
 	@CreationTimestamp
 	private LocalDateTime date;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "job_id")
 	private Job job;

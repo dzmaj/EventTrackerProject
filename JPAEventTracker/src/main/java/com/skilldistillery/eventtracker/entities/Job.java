@@ -43,7 +43,6 @@ public class Job {
 	@Column(name = "updated_timestamp")
 	private LocalDateTime updatedTimestamp;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "job")
 	private List<Update> updates;
 	
