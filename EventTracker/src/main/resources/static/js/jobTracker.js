@@ -83,9 +83,9 @@ function buildJobsTable(jobs) {
   let th4b = document.createElement("th");
   th4b.textContent = "State";
   headRow.appendChild(th4b);
-  let th5 = document.createElement("th");
-  th5.textContent = "Status";
-  headRow.appendChild(th5);
+//   let th5 = document.createElement("th");
+//   th5.textContent = "Status";
+//   headRow.appendChild(th5);
   let th6 = document.createElement("th");
   th6.textContent = "Source";
   headRow.appendChild(th6);
@@ -174,9 +174,9 @@ function buildJobsTable(jobs) {
     data = document.createElement("td");
     data.textContent = element.state;
     row.appendChild(data);
-    data = document.createElement("td");
-    data.textContent = "status";
-    row.appendChild(data);
+    // data = document.createElement("td");
+    // data.textContent = "status";
+    // row.appendChild(data);
     data = document.createElement("td");
     data.textContent = element.source;
     row.appendChild(data);
@@ -205,6 +205,7 @@ function getAllJobs() {
         // console.log(jobs);
 		buildJobsTable(jobs);
 		// jobsData = jobs;
+		displayStats(jobs);
       } else {
         console.error("Error unexpected response status " + xhr.status);
       }
@@ -281,4 +282,48 @@ function deleteJob(job) {
   };
 
   xhr.send();
+}
+
+var displayStats = function (jobs) {
+	let dataAggDiv = document.getElementById('dataAggDiv');
+	dataAggDiv.textContent = '';
+	let table = document.createElement('table');
+	table.setAttribute('class', 'table table-bordered')
+	let agg = {};
+	dataAggDiv.appendChild(table);
+	jobs.forEach((element, index) => {
+		let location = element.city + ', ' + element.state;
+		if (agg[location] != undefined) {
+			agg[location]++;
+		} else {
+			agg[location] = 1;
+		}
+	});
+	console.log(agg);
+	let header = document.createElement('thead');
+	table.appendChild(header);
+	let headRow = document.createElement('tr');
+	header.appendChild(headRow);
+	let th1 = document.createElement('th');
+	th1.textContent = 'Location';
+	headRow.appendChild(th1);
+	let th2 = document.createElement('th');
+	th2.textContent = 'Total Number of Jobs';
+	headRow.appendChild(th2);
+
+	let body = document.createElement('tbody');
+	table.appendChild(body);
+	for (var p in agg) {
+		let row = document.createElement('tr');
+		body.appendChild(row);
+		
+		let td1 = document.createElement('td');
+		td1.textContent = p;
+		row.appendChild(td1);
+		
+		let td2 = document.createElement('td');
+		td2.textContent = agg[p];
+		row.appendChild(td2);
+
+	}
 }
