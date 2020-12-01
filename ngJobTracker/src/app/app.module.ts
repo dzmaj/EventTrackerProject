@@ -9,11 +9,15 @@ import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TrimTextPipe } from './pipes/trim-text.pipe';
+import { TotalLocationsPipe } from './pipes/total-locations.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    JobListComponent
+    JobListComponent,
+    TrimTextPipe,
+    TotalLocationsPipe
   ],
   imports: [
     BrowserModule,

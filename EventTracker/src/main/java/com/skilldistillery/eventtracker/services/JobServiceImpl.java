@@ -38,6 +38,7 @@ public class JobServiceImpl implements JobService {
 			return null;
 		}
 		Job dbJob = dbJobOpt.get();
+		if (job.getCompany() != null) { dbJob.setCompany(job.getCompany()); }
 		if (job.getCity() != null) { dbJob.setCity(job.getCity()); }
 		if (job.getState() != null) { dbJob.setState(job.getState()); }
 		if (job.getPosition() != null) { dbJob.setPosition(job.getPosition()); }

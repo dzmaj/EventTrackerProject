@@ -45,7 +45,7 @@ export class JobListComponent implements OnInit {
     this.jobSvc.update(job).subscribe(
       data => {
         this.reload();
-        this.selected = Object.assign({}, data);;
+        this.selected = Object.assign({}, data);
       },
       err => console.error('Observer got an error from update: ' + err)
     );
@@ -70,6 +70,14 @@ export class JobListComponent implements OnInit {
 
   cancelUpdate() {
     this.editJob = null;
+  }
+
+  clearNewJob() {
+    this.newJob = new Job();
+  }
+
+  getNumJobs() {
+    return this.jobs ? this.jobs.length : null;
   }
 
 
