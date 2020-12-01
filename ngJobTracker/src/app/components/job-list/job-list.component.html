@@ -1,1 +1,28 @@
-<p>job-list works!</p>
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Position</th>
+        <th>Company</th>
+        <th>Description</th>
+        <th>City</th>
+        <th>State</th>
+        <th>URL</th>
+        <th>Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let job of jobs">
+        <td>{{job.id}}</td>
+        <td>{{job.position}}</td>
+        <td>{{job.company}}</td>
+        <td>description</td>
+        <td>{{job.city}}</td>
+        <td>{{job.state}}</td>
+        <td>{{job.url}}</td>
+        <td>{{job.source}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
