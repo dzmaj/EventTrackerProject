@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="!selected">
   <table class="table">
     <thead>
       <tr>
@@ -13,16 +13,63 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let job of jobs">
+      <tr *ngFor="let job of jobs" (click)="selectJob(job)">
         <td>{{job.id}}</td>
         <td>{{job.position}}</td>
         <td>{{job.company}}</td>
-        <td>description</td>
+        <td *ngIf="job.description.length < 50">{{job.description}}</td>
+        <td *ngIf="job.description.length > 49">{{job.description.slice(0,47) + '...'}}</td>
         <td>{{job.city}}</td>
         <td>{{job.state}}</td>
-        <td>{{job.url}}</td>
+        <td *ngIf="job.url">
+          <a *ngIf="job.url.length > 20" [href]="job.url">{{job.url.slice(0,17) + '...'}}</a>
+          <a *ngIf="job.url.length < 21" [href]="job.url">{{job.url}}</a>
+        </td>
+        <td *ngIf="!job.url"></td>
         <td>{{job.source}}</td>
       </tr>
     </tbody>
   </table>
+</div>
+<div *ngIf="selected && !editJob">
+  <h2>{{selected.position}} at {{selected.company}}</h2>
+  <button class="btn btn-secondary" (click)="selectJob(null)">Back</button>
+  <button class="btn btn-primary" (click)="setEditJob()">Edit</button>
+  <button class="btn btn-danger" (click)="deleteJob(selected)">Delete</button>
+</div>
+<div *ngIf="editJob">
+  <form class="form-group">
+    <div class="form-group">
+      <label for="position">Position</label>
+      <input type="text" name="position" id="position" [(ngModel)]="editJob.position" placeholder="Position/Title">
+    </div>
+    <div class="form-group">
+      <label for="company">Company</label>
+      <input type="text" name="company" id="company" [(ngModel)]="editJob.company" placeholder="Company">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea name="description" id="description" cols="30" rows="5" [(ngModel)]="editJob.description"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" name="city" id="city" [(ngModel)]="editJob.city" placeholder="City">
+    </div>
+    <div class="form-group">
+      <label for="state">State</label>
+      <input type="text" name="state" id="state" [(ngModel)]="editJob.state" placeholder="State">
+    </div>
+    <div class="form-group">
+      <label for="url">URL</label>
+      <input type="text" name="url" id="url" [(ngModel)]="editJob.url" placeholder="URL">
+    </div>
+    <div class="form-group">
+      <label for="source">URL</label>
+      <input type="text" name="source" id="source" [(ngModel)]="editJob.source" placeholder="(linkedin/indeed/recruiter)">
+    </div>
+    <div class="form-group">
+      <button (click)="updateJob(editJob)">Submit</button>
+      <button (click)="cancelUpdate()">Cancel</button>
+    </div>
+  </form>
 </div>
