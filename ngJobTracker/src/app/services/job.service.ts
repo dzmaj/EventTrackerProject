@@ -15,7 +15,7 @@ export class JobService {
   private url = this.baseUrl + 'api/jobs'
 
 
-  public index(): Observable<Job[]> {
+  index(): Observable<Job[]> {
     return this.http.get<Job[]>(this.url).pipe(
       catchError((err: any) => {
         console.log(err);
@@ -24,5 +24,42 @@ export class JobService {
     );
   }
 
+  create(job: Job): Observable<Job> {
+    const httpOptions = {
+      headers: {
+        'Content-type': 'application/json'
+      }
+    };
+    return this.http.post<Job>(this.url, job, httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error creating job');
+      })
+    );
+  }
 
+  public update(job: Job): Observable<Job> {
+    const httpOptions = {
+      headers: {
+        'Content-type': 'application/json'
+      }
+    };
+    return this.http.put<Job>(this.url + '/' + job.id, job, httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error updating job');
+      })
+    );
+  }
+
+  public delete(id: number): Observable<boolean> {
+    return this.http.delete<boolean>(this.url + '/' + id).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error deleting todo');
+      })
+    );
+  }
 }
