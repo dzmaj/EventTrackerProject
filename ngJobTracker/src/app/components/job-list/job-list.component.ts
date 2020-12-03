@@ -1,7 +1,9 @@
+import { TotalLocationsPipe } from './../../pipes/total-locations.pipe';
 import { MapsService } from './../../services/maps.service';
 import { JobService } from './../../services/job.service';
 import { Component, OnInit } from '@angular/core';
 import { Job } from 'src/app/models/job';
+import { textChangeRangeIsUnchanged } from 'typescript';
 
 @Component({
   selector: 'app-job-list',
@@ -28,18 +30,48 @@ export class JobListComponent implements OnInit {
     lat: 39.74,
     lng: 104.99
   }
-  markers = [];
-  constructor(private jobSvc: JobService, private mapsService: MapsService) { }
+  markers = [{}];
+  constructor(private jobSvc: JobService, private mapsService: MapsService, private totalLocationsPipe: TotalLocationsPipe) { }
 
   ngOnInit(): void {
     this.reload();
     // this.mapCenter = this.mapsService.getCurrentLocation();
-    navigator.geolocation.getCurrentPosition((position) => {
+    navigator.geolocation.getCurrentPosition((pos) => {
       this.mapCenter = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
+        lat: pos.coords.latitude,
+        lng: pos.coords.longitude,
+      }
+      this.markers[0] = {
+        position: {
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude
+        },
+        label: 'Your Location'
       }
     })
+  }
+
+  clearMarkers() {
+    this.markers = this.markers.slice(0,1);
+  }
+  addAllMarkers(items) {
+    let arr = this.totalLocationsPipe.transform(items);
+    for(let i = 0; i < arr.length; i++) {
+      this.getLocation(arr[i]);
+    }
+  }
+  addMarker(marker) {
+    let added = false;
+    console.log(marker);
+    for (let i = 0; i < this.markers.length; i++) {
+      if (this.markers[i]['title'] === marker['title']) {
+        this.markers[i] = marker;
+        added = true;
+      }
+    }
+    if (!added) {
+      this.markers.push(marker)
+    }
   }
 
   getLocation(item: object) {
@@ -53,10 +85,10 @@ export class JobListComponent implements OnInit {
         result = geocode['results'][0]['geometry']['location']
         console.log(result);
         this.mapCenter = result;
-        this.markers.push(
+        this.addMarker(
           {
             position: result,
-            label: 'Jobs: '+item['total'],
+            label: place + ' - Jobs: ' + item['total'],
             title: place
           }
         )
