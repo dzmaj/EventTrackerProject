@@ -36,19 +36,24 @@ export class JobListComponent implements OnInit {
   ngOnInit(): void {
     this.reload();
     // this.mapCenter = this.mapsService.getCurrentLocation();
-    navigator.geolocation.getCurrentPosition((pos) => {
-      this.mapCenter = {
-        lat: pos.coords.latitude,
-        lng: pos.coords.longitude,
-      }
-      this.markers[0] = {
-        position: {
+    console.log(navigator);
+    if ('geolocation' in navigator) {
+
+      navigator.geolocation.getCurrentPosition((pos) => {
+        console.log(pos)
+        this.mapCenter = {
           lat: pos.coords.latitude,
-          lng: pos.coords.longitude
-        },
-        label: 'Your Location'
-      }
-    })
+          lng: pos.coords.longitude,
+        }
+        this.markers[0] = {
+          position: {
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude
+          },
+          label: 'Your Location'
+        }
+      })
+    }
   }
 
   clearMarkers() {
