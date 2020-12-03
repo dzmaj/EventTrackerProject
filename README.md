@@ -3,19 +3,26 @@
 ## Overview and Lessons Learned
 For this project, I created a database for tracking job applications. The database consists of two tables: one for job applications, and one for updates to the status of those applications.
 
+### Back End REST - mySQL, JPA, Spring
+
+This project went faster than I expected on the back end, Spring data repositories cut out a lot of the work. I did feel like I improved from previous work with REST controllers by being more consistent with which logic I put into the service implementations and which logic in the controllers. The most time consuming part overall was testing.
+
+### Front End - JavaScript Version
 There is a single page front end that allows for basic CRUD operations on the job table. It displays a dynamic table of the jobs currently in the database. Clicking on one of the rows will change which job is currently active in the detail view.
 
 The detail view will display the current information for a job in a form where it can be updated. The job can also be deleted here. There is also a separate form for creating a brand new job.
 
 There is also a separate table to aggregate the total number of jobs for each location.
 
-This project went faster than I expected on the back end, Spring data repositories cut out a lot of the work. I did feel like I improved from previous work with REST controllers by being more consistent with which logic I put into the service implementations and which logic in the controllers. The most time consuming part overall was testing.
-
 The front end portion of this project was my first full project with javascript, and was more difficult and time consuming than I anticipated. I did not have time to make the front end as extensive as the back. I also struggled more with figuring out the overall structure of the front end than with the syntax and logic of individual functions.
 
 Dealing with asynchronicity in particular gave me trouble. Initially I was trying to call a function for a XMLHttpRequest, and follow it with another function to update the display of data, which was not giving me the results I expected because I was not accounting for the XHR leaving the stack and then that data not being updated until after it had gone through the event loop.
 
+### Front End - Angular Version
+The Angular version does everything the Javascript version does, but it has a few extra little features and is overall much nicer to use. Once I figured out the basics of Angular, everything went much more smoothly than working with just JavaScript, and I was able to put more time into exploring things like pipes and learning more bootstrap.
+
 ## Technologies Used
+- Angular
 - Spring Boot
 - Spring Data
 - JPA
@@ -25,10 +32,9 @@ Dealing with asynchronicity in particular gave me trouble. Initially I was tryin
 - Postman
 - JavaScript
 - HTML
+- Bootstrap
 
 ## REST Mappings
-Base URL
-http://3.131.11.111:8080/EventTracker/api/
 | Return Type  | Route                                      | Functionality                                                                          |
 |--------------|--------------------------------------------|----------------------------------------------------------------------------------------|
 | List<Job>    | GET api/jobs                               | Gets a list of all jobs                                                                |
