@@ -1,3 +1,4 @@
+import { MapsService } from './../../services/maps.service';
 import { JobService } from './../../services/job.service';
 import { Component, OnInit } from '@angular/core';
 import { Job } from 'src/app/models/job';
@@ -22,10 +23,46 @@ export class JobListComponent implements OnInit {
                             'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX',
                             'UM', 'UT', 'VA', 'VI', 'VT', 'WA', 'WI', 'WV',
                             'WY'];
-  constructor(private jobSvc: JobService) { }
+  locSelected: string;
+  mapCenter = {
+    lat: 39.74,
+    lng: 104.99
+  }
+  markers = [];
+  constructor(private jobSvc: JobService, private mapsService: MapsService) { }
 
   ngOnInit(): void {
     this.reload();
+    // this.mapCenter = this.mapsService.getCurrentLocation();
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.mapCenter = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      }
+    })
+  }
+
+  getLocation(item: object) {
+    let place = item['name']
+    let geocode = null;
+    let result = null;
+    this.mapsService.getGeocode(place).subscribe(
+      data => {
+        geocode = data;
+        console.log(geocode);
+        result = geocode['results'][0]['geometry']['location']
+        console.log(result);
+        this.mapCenter = result;
+        this.markers.push(
+          {
+            position: result,
+            label: 'Jobs: '+item['total'],
+            title: place
+          }
+        )
+      },
+      err => console.error('Observer got an error from geocode: ' + err)
+    )
   }
 
   reload():void {
@@ -87,10 +124,5 @@ export class JobListComponent implements OnInit {
   getNumJobs() {
     return this.jobs ? this.jobs.length : null;
   }
-
-
-
-
-
 
 }
