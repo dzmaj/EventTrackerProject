@@ -31,7 +31,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
   ],
   providers: [
     JobService,
-    MapsService
+    MapsService,
+    TotalLocationsPipe
   ],
   bootstrap: [AppComponent]
 })

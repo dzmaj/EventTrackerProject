@@ -48,6 +48,10 @@
             </tr>
           </tbody>
         </table>
+        <div class="btn-group">
+          <button class="btn btn-outline-danger" (click)="clearMarkers()">Clear Markers</button>
+          <button class="btn btn-outline-primary" (click)="addAllMarkers(jobs)">Add All Markers</button>
+        </div>
       </div>
       <div class="col">
         <google-map [center]="mapCenter" [zoom]="9">
