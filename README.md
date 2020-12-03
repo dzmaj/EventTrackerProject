@@ -1,9 +1,11 @@
 # Job Application Tracker Project
 
 ## Overview and Lessons Learned
-For this project, I created a database for tracking job applications. The database consists of two tables: one for job applications, and one for updates to the status of those applications.
+This project is a full stack job tracker that allows the user to enter information for jobs they are interested in. Users can perform full CRUD operations on the jobs. It also totals the jobs up by location, and displays markers for the job locations in an embedded Google Map. The project was done in three stages as I learned: A back end database and REST api, a plain Javascript/HTML front end, and finally an angular front end.
+
 
 ### Back End REST - mySQL, JPA, Spring
+For this project, I created a database for tracking job applications. The database consists of two tables: one for job applications, and one for updates to the status of those applications.
 
 This project went faster than I expected on the back end, Spring data repositories cut out a lot of the work. I did feel like I improved from previous work with REST controllers by being more consistent with which logic I put into the service implementations and which logic in the controllers. The most time consuming part overall was testing.
 
@@ -19,7 +21,9 @@ The front end portion of this project was my first full project with javascript,
 Dealing with asynchronicity in particular gave me trouble. Initially I was trying to call a function for a XMLHttpRequest, and follow it with another function to update the display of data, which was not giving me the results I expected because I was not accounting for the XHR leaving the stack and then that data not being updated until after it had gone through the event loop.
 
 ### Front End - Angular Version
-The Angular version does everything the Javascript version does, but it has a few extra little features and is overall much nicer to use. Once I figured out the basics of Angular, everything went much more smoothly than working with just JavaScript, and I was able to put more time into exploring things like pipes and learning more bootstrap.
+The Angular version does everything the Javascript version does, but it has a few extra little features and is overall much nicer to use. Once I figured out the basics of Angular, everything went much more smoothly than working with just JavaScript, and I was able to put more time into exploring things like pipes, Bootstrap, and Google Maps.
+
+I was able to get one of my stretch goals finished, which was to integrate a Google map into my application and dynamically add markers to the map. It was not actually too different from the rest of the project, as the main difficulty was to get a latitude and longitude based on a place name. To do so, I just needed to do a get request on the Google maps geocoding api, instead of on my own api, and then look up what the response would look like.
 
 ## Technologies Used
 - Angular
@@ -33,6 +37,7 @@ The Angular version does everything the Javascript version does, but it has a fe
 - JavaScript
 - HTML
 - Bootstrap
+- Google Maps api
 
 ## REST Mappings
 | Return Type  | Route                                      | Functionality                                                                          |
