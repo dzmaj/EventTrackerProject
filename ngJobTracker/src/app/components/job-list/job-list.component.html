@@ -54,9 +54,11 @@
     <p>Source: {{selected.source}}</p>
     <p><a [href]="selected.url">{{selected.url | trimText: 50}}</a></p>
     <p>{{selected.description}}</p>
-    <button class="btn btn-secondary" (click)="selectJob(null)">Back</button>
-    <button class="btn btn-primary" (click)="setEditJob()">Edit</button>
-    <button class="btn btn-danger" (click)="deleteJob(selected)">Delete</button>
+    <div class="btn-group">
+      <button class="btn btn-outline-dark" (click)="selectJob(null)">Back</button>
+      <button class="btn btn-primary" (click)="setEditJob()">Edit</button>
+      <button class="btn btn-danger" (click)="deleteJob(selected)">Delete</button>
+    </div>
   </div>
   <div *ngIf="editJob">
     <form class="form-group">
@@ -96,9 +98,9 @@
           <input class="form-control" type="text" name="source" id="source" [(ngModel)]="editJob.source" placeholder="(linkedin/indeed/recruiter)">
         </div>
       </div>
-      <div class="form-group">
-        <button (click)="updateJob(editJob)">Submit</button>
-        <button (click)="cancelUpdate()">Cancel</button>
+      <div class="btn-group">
+        <button class="btn btn-outline-dark" (click)="cancelUpdate()">Cancel</button>
+        <button class="btn btn-primary" (click)="updateJob(editJob)">Submit</button>
       </div>
     </form>
   </div>
@@ -126,7 +128,7 @@
           <label for="newJob-city">City</label>
           <input class="form-control" type="text" name="city" id="newJob-city" [(ngModel)]="newJob.city" placeholder="City">
         </div>
-        <div class="form-group col">
+        <div class="form-group">
           <label for="newJob-state">State</label>
           <select class="form-control" name="state" id="newJob-state" [(ngModel)]="newJob.state">
             <option *ngFor="let abbrev of stateAbbrevs" [value]="abbrev">{{abbrev}}</option>
@@ -134,18 +136,18 @@
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group">
+        <div class="form-group col">
           <label for="newJob-url">URL</label>
-          <input class="form-control" type="text" name="url" id="newJob-url" [(ngModel)]="newJob.url" placeholder="URL">
+          <input class="form-control" type="text" name="url" id="newJob-url" [(ngModel)]="newJob.url" placeholder="http://...">
         </div>
-        <div class="form-group">
+        <div class="form-group col">
           <label for="newJob-source">Source</label>
           <input class="form-control" type="text" name="source" id="newJob-source" [(ngModel)]="newJob.source" placeholder="(linkedin/indeed/recruiter)">
         </div>
       </div>
-      <div class="form-group">
-        <button (click)="addJob(newJob)">Add New Job</button>
-        <button (click)="clearNewJob()">Clear</button>
+      <div class="btn-group">
+        <button class="btn btn-outline-dark" (click)="clearNewJob()">Clear</button>
+        <button class="btn btn-primary" (click)="addJob(newJob)">Add New Job</button>
       </div>
     </form>
   </div>
